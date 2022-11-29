@@ -1,0 +1,25 @@
+<main class="container">
+  <div class="bg-light p-5 rounded">
+    <h1>Register user</h1>
+    <p class="lead">this is the registration form</p>
+    <form [formGroup]="usersForm" (ngSubmit)="onUsersFormSubmitted(usersForm.value)">
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Firstname</mat-label>
+          <input matInput type="text" placeholder="Firstname" formControlName="firstname" required>
+          <mat-error *ngIf="usersForm.get('firstname')!.invalid">firstname is invalid</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Lastname</mat-label>
+          <input matInput type="text" placeholder="Lastname" formControlName="lastname" required>
+          <mat-error *ngIf="usersForm.get('lastname')!.invalid">lastname is invalid</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</main>
