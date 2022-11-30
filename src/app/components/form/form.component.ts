@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UsersService } from '../../services/users.service';
+import {UsersModel} from "../../models/users.model";
+import {CreateUserModel} from "../../models/create-user.model";
 
 @Component({
   selector: 'app-form',
@@ -10,10 +13,21 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class FormComponent {
   readonly usersForm: FormGroup = new FormGroup({
-    firstname: new FormControl(),
-    lastname: new FormControl()
+    username: new FormControl(),
+    email: new FormControl()
   });
 
-  onUsersFormSubmitted(usersForm: FormGroup): void {
-  }
+  constructor(private _usersService: UsersService) {
+  };
+
+  onUsersFormSubmitted(usersForm: UsersModel): void {
+    this._usersService.createUser({username: usersForm.username, email: usersForm.email})
+  };
+
+  // onUsersFormSubmitted(usersForm: FormGroup): void {
+  //   this._usersService.createUser({
+  //     firstname: usersForm.get('firstname')?.value,
+  //     lastname: usersForm.get('lastname')?.value,
+  //   }).subscribe();
+  // }
 }
